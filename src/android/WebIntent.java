@@ -215,7 +215,7 @@ public class WebIntent extends CordovaPlugin {
     void startActivityForResult(String action, Uri uri, String type, Map<String, String> extras) {
         Intent i = buildActivity(action, uri, type, extras);
         Activity activity = this.cordova.getActivity();
-        activity.startActivityForResult(shareIntent, 1);
+        activity.startActivityForResult(i, 1);
     }
 
     void sendBroadcast(String action, Map<String, String> extras) {
