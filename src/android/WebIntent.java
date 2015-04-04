@@ -207,12 +207,12 @@ public class WebIntent extends CordovaPlugin {
     }
 
     void startActivity(String action, Uri uri, String type, Map<String, String> extras) {
-        Intent i = buildActivity(action, uri, type, extras)
+        Intent i = buildActivity(action, uri, type, extras);
         ((CordovaActivity)this.cordova.getActivity()).startActivity(i);
     }
 
     void startActivityForResult(String action, Uri uri, String type, Map<String, String> extras) {
-        Intent i = buildActivity(action, uri, type, extras)
+        Intent i = buildActivity(action, uri, type, extras);
         ((CordovaActivity)this.cordova.getActivity()).startActivityForResult(i);
     }
 
