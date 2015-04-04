@@ -197,7 +197,9 @@ public class WebIntent extends CordovaPlugin {
             } else if (key.equals(Intent.EXTRA_EMAIL)) {
                 // allows to add the email address of the receiver
                 i.putExtra(Intent.EXTRA_EMAIL, new String[] { value });
-            } else {
+            } else if(key.equals("Package")) 
+                i.setPackage(value);
+            else {
                 i.putExtra(key, value);
             }
         }
