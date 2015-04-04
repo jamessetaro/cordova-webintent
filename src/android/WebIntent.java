@@ -173,7 +173,7 @@ public class WebIntent extends CordovaPlugin {
         }
     }
 
-    void startActivity(String action, Uri uri, String type, Map<String, String> extras) {
+    Intent buildActivity(String action, Uri uri, String type, Map<String, String> extras){
         Intent i = (uri != null ? new Intent(action, uri) : new Intent(action));
         
         if (type != null && uri != null) {
@@ -192,7 +192,7 @@ public class WebIntent extends CordovaPlugin {
             } else if (key.equals(Intent.EXTRA_STREAM)) {
                 // allowes sharing of images as attachments.
                 // value in this case should be a URI of a file
-				final CordovaResourceApi resourceApi = webView.getResourceApi();
+                final CordovaResourceApi resourceApi = webView.getResourceApi();
                 i.putExtra(key, resourceApi.remapUri(Uri.parse(value)));
             } else if (key.equals(Intent.EXTRA_EMAIL)) {
                 // allows to add the email address of the receiver
@@ -203,7 +203,17 @@ public class WebIntent extends CordovaPlugin {
                 i.putExtra(key, value);
             }
         }
+        return i;
+    }
+
+    void startActivity(String action, Uri uri, String type, Map<String, String> extras) {
+        Intent i = buildActivity(action, uri, type, extras)
         ((CordovaActivity)this.cordova.getActivity()).startActivity(i);
+    }
+
+    void startActivityForResult(String action, Uri uri, String type, Map<String, String> extras) {
+        Intent i = buildActivity(action, uri, type, extras)
+        ((CordovaActivity)this.cordova.getActivity()).startActivityForResult(i);
     }
 
     void sendBroadcast(String action, Map<String, String> extras) {
